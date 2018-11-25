@@ -1,2 +1,2 @@
 # guestbook
-Guestbook PHP Script
+This is a simple Guestbook PHP Script
