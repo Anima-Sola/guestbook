@@ -34,6 +34,12 @@ $font-stack: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
                 font-style: italic;
                 margin-bottom: 5px;
             }
+
+            .message-edit-button {
+                height: 30px;
+                font-weight: 600;
+                font-style: italic;
+            }
         }
     
         .message__body {

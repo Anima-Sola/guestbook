@@ -38,7 +38,7 @@
             <p class="input-title form-group__captcha">Введите символы*:</p>
             <div class="captcha-group">
                 <span class="captcha-img" id="captcha"><!-- Здесь будет каптча --></span>
-                <span class="refresh-captcha-link" id="refresh-captcha-link">Обновить изображение</span>
+                <span class="refresh-captcha-link" onclick="return guestbook.getCaptcha();" id="refresh-captcha-link">Обновить изображение</span>
             </div>
             <div class="input-field-captcha">
                 <input class="captcha-field" type="text" dataForSend="true" name="guestbook-captcha">
@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="form-group">
-            <input id="submit-new-message-input-form" class="submit-button" type="button" value="ОТПРАВИТЬ">
+            <input id="submit-new-message-input-form" onclick="return guestbook.sendNewMessage();" class="submit-button" type="button" value="ОТПРАВИТЬ">
         </div>
     </form>
 </div>

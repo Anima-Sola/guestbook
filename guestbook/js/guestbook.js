@@ -1,5 +1,7 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
 
+    guestbook = {};
+    
     function getCaptcha() {
         $('#captcha').load('/guestbook/modules/Captcha/BuildCaptcha.php');
     }
@@ -96,12 +98,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-    //Навешиваем события
-    function setEvents() {
-        document.getElementById('refresh-captcha-link').addEventListener('click', getCaptcha);
-        document.getElementById('submit-new-message-input-form').addEventListener('click', sendNewMessage);
+    function editMessage(messageId, isAdmin) {
+
+    
+
+        console.log(messageId, ' ', isAdmin);
     }
 
-    setEvents();
     getCaptcha();
+    
+    window.guestbook.editMessage = editMessage;
+    window.guestbook.sendNewMessage = sendNewMessage;
+    window.guestbook.getCaptcha = getCaptcha;
+
 });

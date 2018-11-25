@@ -41,6 +41,12 @@
   margin-bottom: 5px;
 }
 
+.message .message__wrapper .message__header .message-edit-button {
+  height: 30px;
+  font-weight: 600;
+  font-style: italic;
+}
+
 .message .message__wrapper .message__body {
   font: 13px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   width: calc(100% - 250px);
