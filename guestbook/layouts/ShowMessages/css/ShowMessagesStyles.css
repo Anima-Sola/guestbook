@@ -1,0 +1,97 @@
+.message {
+  width: 100%;
+  background: #F5F5F5;
+  margin-bottom: 5px;
+  min-height: 100px;
+  border: 1px solid #ceb3b3;
+  min-width: 740px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
+}
+
+.message .message__wrapper {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.message .message__wrapper .message__header {
+  font: 13px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  height: initial;
+  width: 250px;
+  float: left;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 5px;
+}
+
+.message .message__wrapper .message__header .user-name {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.message .message__wrapper .message__header .user-url {
+  margin-bottom: 5px;
+}
+
+.message .message__wrapper .message__header .message-date {
+  font-style: italic;
+  margin-bottom: 5px;
+}
+
+.message .message__wrapper .message__body {
+  font: 13px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width: calc(100% - 250px);
+  margin-left: 250px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 5px;
+}
+
+.message .message__wrapper .message__body .user-message-title {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.message .message__wrapper .message__body .message-text {
+  margin-bottom: 5px;
+}
+
+.message .message__wrapper .message__body .admin-reply-title {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.message .message__wrapper .message__userdata {
+  font: 13px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  border-top: 1px solid #ceb3b3;
+  margin-top: 5px;
+}
+
+.message .message__wrapper .message__userdata .user-data-title {
+  font-weight: 600;
+  margin: 5px 0;
+}
+
+.message .message__wrapper .message__userdata .user-email {
+  margin-bottom: 5px;
+}
+
+.message .message__wrapper .message__userdata .user-userIP {
+  margin-bottom: 5px;
+}
+
+.message .message__wrapper .message__userdata .user-userbrowser {
+  margin-bottom: 5px;
+}
+
+.message .message__wrapper .message__userdata .user-ismessagemoderated {
+  font-style: italic;
+}
+
+/*.block {}
+.block__element {}
+.block--modifier {}*/
+/*# sourceMappingURL=ShowMessagesStyles.css.map */

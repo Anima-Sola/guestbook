@@ -1,0 +1,239 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+html, body {
+  font: 16px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background: url(/images/back.png);
+}
+
+.content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 100vh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  max-width: 1200px;
+  min-width: 380px;
+  margin: auto;
+}
+
+.header {
+  height: 80px;
+  border-bottom: 1px solid #000;
+}
+
+.header .logo {
+  float: left;
+}
+
+.header .main-menu {
+  float: right;
+  line-height: 80px;
+  margin-top: 3px;
+}
+
+.header .main-menu__item {
+  display: inline;
+  margin: 0 20px 0 20px;
+  font: 1.5rem/50px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-decoration: none;
+  color: #888888;
+}
+
+.header .main-menu__item a {
+  font: 1.5rem/50px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-decoration: none;
+  color: #888888;
+}
+
+.header .main-menu__item a:hover {
+  color: #000;
+}
+
+.wrapper {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.reg-form {
+  width: 40%;
+  margin: 200px auto 0 auto;
+  background: #F5F5F5;
+  border: 1px solid #E3E3E3;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.reg-form h1 {
+  display: block;
+  font: 24px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.reg-form .input-wrapper strong {
+  width: 100%;
+  font: 13px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.reg-form .input-wrapper input {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 10px;
+  font: 13px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 5px;
+}
+
+.reg-form .input-wrapper .warning {
+  display: block;
+  color: red;
+  font: 13px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-top: -10px;
+}
+
+.reg-form button {
+  display: block;
+  width: 80%;
+  margin: 10px auto;
+  font: 16px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 5px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.reg-link {
+  text-align: center;
+}
+
+.reg-link span {
+  font: 20px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.reg-link a {
+  font: 25px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.modal-window .modal-window__overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000;
+  opacity: 0.4;
+}
+
+.modal-window .modal-window__content {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  max-height: 600px;
+  max-width: 800px;
+  background: #fff;
+  border: 3px solid #fff;
+  overflow: auto;
+  text-align: center;
+}
+
+.modal-window .modal-window__content .modal-window__content-wrapper {
+  margin-top: 25px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: auto;
+}
+
+.modal-window .modal-window__cross {
+  position: absolute;
+  color: #000;
+  background: #fff;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 24px;
+  border: 1px solid #E3E3E3;
+}
+
+.modal-window .modal-window__cross:hover {
+  background: grey;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.footer {
+  border-top: 1px solid #000;
+  color: #000;
+  height: 80px;
+  text-align: center;
+  line-height: 80px;
+}
+
+/*.block {}
+.block__element {}
+.block--modifier {}*/
+/*# sourceMappingURL=style.css.map */

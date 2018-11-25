@@ -1,0 +1,60 @@
+.modal-window .modal-window__overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000;
+  opacity: 0.4;
+}
+
+.modal-window .modal-window__content {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  max-height: 600px;
+  max-width: 800px;
+  background: #fff;
+  border: 3px solid #fff;
+  overflow: auto;
+  text-align: center;
+}
+
+.modal-window .modal-window__content .modal-window__content-wrapper {
+  margin-top: 25px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: auto;
+}
+
+.modal-window .modal-window__cross {
+  position: absolute;
+  color: #000;
+  background: #fff;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 24px;
+  border: 1px solid #E3E3E3;
+}
+
+.modal-window .modal-window__cross:hover {
+  background: grey;
+  color: #fff;
+  border: 1px solid #fff;
+}
+/*# sourceMappingURL=ModalWindowStyles.css.map */

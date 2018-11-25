@@ -1,0 +1,53 @@
+.modal-window {
+ 
+    .modal-window__overlay {
+        position: fixed; 
+        left: 0; 
+        top: 0; 
+        right: 0; 
+        bottom: 0; 
+        background-color: #000; 
+        opacity: 0.4;
+    }
+    
+    .modal-window__content {
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        box-sizing: border-box;
+        padding: 10px;
+        max-height: 600px;
+        max-width: 800px;
+        background: #fff;
+        border: 3px solid #fff;
+        overflow: auto;
+        text-align: center;
+        
+        .modal-window__content-wrapper {
+            margin-top: 25px;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+        }
+    }
+    
+    .modal-window__cross {
+        position: absolute;
+        color: #000;
+        background: #fff;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        text-align: center;
+        line-height: 24px;
+        border: 1px solid #E3E3E3;
+    }
+    
+    .modal-window__cross:hover {
+        background: grey;
+        color: #fff;
+        border: 1px solid #fff;
+    }
+    
+}
