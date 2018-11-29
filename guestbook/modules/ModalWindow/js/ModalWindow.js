@@ -9,8 +9,10 @@
         
         if ( height > 600 ) height = 600;
         if ( width > 800 ) width = 800;
+
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        styles = "top: calc(50% - " + height/2 + measureType + "); " +
+        styles = "top: calc(50% + " + (scrollTop - height/2) + measureType + "); " +
                  "left: calc(50% - " + width/2 + measureType + "); " +
                  "width: " + width + measureType + "; " +
                  "height: " + height + measureType + ";";
@@ -26,8 +28,10 @@
         
         if ( height > 600 ) height = 600;
         if ( width > 800 ) width = 800;
+
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        styles = "top: calc(50% - " + ( height / 2 + 12 ) + measureType + "); " +
+        styles = "top: calc(50% + " + (scrollTop - height/2 - 12) + measureType + "); " +
                  "left: calc(50% + " + ( width / 2 - 12 ) + measureType + ");";
 
         return styles;

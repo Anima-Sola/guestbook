@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+;(function() {
 
     guestbook = {};
     
@@ -100,15 +100,41 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function editMessage(messageId, isAdmin) {
 
-    
+        var dataForSend = {};
+        dataForSend['message_id'] = messageId;
 
-        console.log(messageId, ' ', isAdmin);
+        result = $.ajax({
+            type: 'POST',
+            url: '/guestbook/Ajax/GetMessageById.php', 
+            dataType: 'text',
+            data: dataForSend,
+            success: function(msg){
+                result = JSON.parse(msg);
+
+                if(!result['is_error']) {
+
+                    modalWindow.showModalWindow('700', '400', 'px', "Данные получены");
+
+                } else {
+                    modalWindow.showModalWindow('500', '200', 'px', "Не удалось получить данные от сервера.");
+                }
+
+            }, 
+            error: function(){
+                modalWindow.showModalWindow('500', '200', 'px', "Нет связи с сервером.");
+            }        
+        });
     }
 
-    getCaptcha();
+    guestbook.editMessage = editMessage;
+    guestbook.sendNewMessage = sendNewMessage;
+    guestbook.getCaptcha = getCaptcha;
     
-    window.guestbook.editMessage = editMessage;
-    window.guestbook.sendNewMessage = sendNewMessage;
-    window.guestbook.getCaptcha = getCaptcha;
+    window.guestbook = guestbook;
 
+})();
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    guestbook.getCaptcha();
 });

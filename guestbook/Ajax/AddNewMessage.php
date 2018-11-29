@@ -1,7 +1,7 @@
 <?php
     namespace guestbook;
 
-    require_once __DIR__.'/dataValidation.php';
+    require_once __DIR__.'/DataValidation.php';
 
     function getUserIP() {
         
