@@ -5,17 +5,37 @@
     // Получаем код стилей модального окна для центрирования по горизонтали и вертикали
     function getCenterWindowStyles(width, height, measureType) {
         
-        let styles;
-        
-        if ( height > 600 ) height = 600;
-        if ( width > 800 ) width = 800;
+        var styles = '';
+
+        var clientWidth = document.documentElement.clientWidth;
+        var clientHeight = document.documentElement.clientHeight;
+
+        if( measureType == '%' ) {
+
+            if( width > 100 ) width = 100;
+            if( height > 100) height = 100;
+           
+            widthInPx = clientWidth * width / 100;
+            heightInPx = clientHeight * height / 100;
+
+        } else {
+
+            widthInPx = width;
+            heightInPx = height;
+
+            if ( width > clientWidth ) widthInPx = clientWidth;
+            if ( height > clientHeight  ) heightInPx = clientHeight;
+
+        }
 
         var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        styles = "top: calc(50% + " + (scrollTop - height/2) + measureType + "); " +
-                 "left: calc(50% - " + width/2 + measureType + "); " +
-                 "width: " + width + measureType + "; " +
-                 "height: " + height + measureType + ";";
+        var top = scrollTop + clientHeight/2 - heightInPx/2;
+        var left = clientWidth/2 - widthInPx/2;
+
+        styles = "top: " + top + "px; " +
+                 "left: " + left  + "px; " +
+                 "width: " +  widthInPx + "px; " +
+                 "height: " + heightInPx + "px;";
 
         return styles;
         
@@ -24,15 +44,35 @@
     // Получаем код стилей положения крестика
     function getCrossStyles(width, height, measureType) {
         
-        var styles;
-        
-        if ( height > 600 ) height = 600;
-        if ( width > 800 ) width = 800;
+        var styles = '';
+
+        var clientWidth = document.documentElement.clientWidth;
+        var clientHeight = document.documentElement.clientHeight;
+
+        if( measureType == '%' ) {
+
+            if( width > 100 ) width = 100;
+            if( height > 100) height = 100;
+           
+            widthInPx = clientWidth * width / 100;
+            heightInPx = clientHeight * height / 100;
+
+        } else {
+
+            widthInPx = width;
+            heightInPx = height;
+
+            if ( width > clientWidth ) widthInPx = clientWidth;
+            if ( height > clientHeight  ) heightInPx = clientHeight;
+
+        }
 
         var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        styles = "top: calc(50% + " + (scrollTop - height/2 - 12) + measureType + "); " +
-                 "left: calc(50% + " + ( width / 2 - 12 ) + measureType + ");";
+        var top = scrollTop + clientHeight/2 - heightInPx/2 - 12;
+        var left = clientWidth/2 + widthInPx/2 - 12;
+
+        styles = "top: " + top + "px; " +
+                 "left: " + left  + "px; ";
 
         return styles;
         

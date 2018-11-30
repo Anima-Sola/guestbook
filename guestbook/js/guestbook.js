@@ -112,8 +112,7 @@
                 result = JSON.parse(msg);
 
                 if(!result['is_error']) {
-
-                    modalWindow.showModalWindow('700', '400', 'px', "Данные получены");
+                    modalWindow.showModalWindow('820', '500', 'px', "Данные получены");
 
                 } else {
                     modalWindow.showModalWindow('500', '200', 'px', "Не удалось получить данные от сервера.");
