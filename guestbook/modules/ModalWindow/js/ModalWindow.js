@@ -35,7 +35,9 @@
         styles = "top: " + top + "px; " +
                  "left: " + left  + "px; " +
                  "width: " +  widthInPx + "px; " +
-                 "height: " + heightInPx + "px;";
+                 "height: " + heightInPx + "px; " +
+                 "max-width: " + clientWidth + "px; " +
+                 "max-height: " + clientHeight + "px;";
 
         return styles;
         

@@ -98,6 +98,29 @@
 
     }
 
+    function showEditMessageForm(data, isAdmin) {
+
+        var title = (isAdmin) ? 'Модерация/редактирования сообщения' : 'Редактирование сообщения';
+
+        var content = `
+            <div class="edit-message-form">
+                <div class="edit-message-form__title"><p>${title}</p></div>
+                <p>Имя пользователя: ${data['message_username']}</p>
+                <p>Email пользователя: ${data['message_useremail']}</p>
+                <p>Дата сообщения: ${data['message_date']}</p>
+                <p>Сайт пользователя: ${data['message_userurl']}</p>
+                <p>IP-адрес пользователя: ${data['message_iserIP']}</p>
+                <p>Браузер пользователя: ${data['message_user_browser']}</p>
+                <p>Сообщение пользователя:</p>
+                <textarea placeholder="Введите текст сообщения (не более 1000 символов)...">${data['message_messagetext']}</textarea>
+                <p>Ответ администратора:</p>
+                <textarea placeholder="Введите текст сообщения (не более 1000 символов)...">${data['message_adminreply']}</textarea>
+            </div>`;
+
+        modalWindow.showModalWindow('50', '50', '%', content);
+        
+    }
+    
     function editMessage(messageId, isAdmin) {
 
         var dataForSend = {};
@@ -112,10 +135,13 @@
                 result = JSON.parse(msg);
 
                 if(!result['is_error']) {
-                    modalWindow.showModalWindow('820', '500', 'px', "Данные получены");
+                    
+                    showEditMessageForm(result['data'][0], isAdmin);
 
                 } else {
+
                     modalWindow.showModalWindow('500', '200', 'px', "Не удалось получить данные от сервера.");
+
                 }
 
             }, 

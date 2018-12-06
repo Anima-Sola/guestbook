@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAEI,kBAFc,CAEd,yBAAyB,CAAC;EACtB,IAAI,EAAE,IAAI,CALL,WAAW,EAAE,gBAAgB,EAAE,SAAS,EAAE,KAAK,EAAE,UAAU;EAOhE,WAAW,EAAE,GAAG;CACnB",
+    "sources": [
+        "EditMessageFormStyles.scss"
+    ],
+    "names": [],
+    "file": "EditMessageFormStyles.css"
+}

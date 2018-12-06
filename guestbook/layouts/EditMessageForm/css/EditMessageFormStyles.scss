@@ -1,0 +1,11 @@
+$font-stack: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+.edit-message-form {
+
+    .edit-message-form__title {
+        font: 20px $font-stack;
+        //text-align: center;
+        font-weight: 600;
+    }
+
+}
