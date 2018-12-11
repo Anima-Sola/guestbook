@@ -105,9 +105,7 @@
 
         html = `<div class="modal-window__overlay" onclick="modalWindow.closeModalWindow();"></div>
                     <div class="modal-window__content" style="${getCenterWindowStyles(width, height, measureType)}">
-                        <div class="modal-window__content-wrapper">
-                            <div>${content}</div>
-                        </div>
+                        ${content}
                     </div>
                 <div class="modal-window__cross" onclick="modalWindow.closeModalWindow();" style="${getCrossStyles(width, height, measureType)}">X</div>`;
 

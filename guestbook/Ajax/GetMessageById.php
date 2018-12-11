@@ -7,11 +7,15 @@
 
         $messageId = $_POST['message_id'];
 
-        $respond['data'] = DBObject::getMessageById($messageId);
+        $message = DBObject::getMessageById($messageId)[0];
+
+        require_once __DIR__.'/../layouts/EditMessageForm/EditMessageForm.php';
+
+        //$respond['data'] = require_once __DIR__.'/../layouts/EditMessageForm/EditMessageForm.php';
 
         $respond['is_error'] = false;
 
-        echo json_encode($respond);
+        //echo json_encode($respond);
     
     } else {
 

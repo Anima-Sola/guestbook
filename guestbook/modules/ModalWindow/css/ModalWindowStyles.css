@@ -20,10 +20,6 @@
   padding: 0;
 }
 
-.modal-window .modal-window__content .modal-window__content-wrapper {
-  display: block;
-}
-
 .modal-window .modal-window__cross {
   position: absolute;
   color: #fff;

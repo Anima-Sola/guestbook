@@ -23,7 +23,7 @@
                         $messageId = $message['message_id'];
                         $isAdmin = ($_SESSION['guestbook_isAdmin']) ? "true" : "false";
 
-                        echo "<input class='message-edit-button' type='button' value='Редактировать сообщение' onclick='return guestbook.editMessage($messageId, $isAdmin)'>";
+                        echo "<input class='message-edit-button' type='button' value='Редактировать сообщение' onclick='return guestbook.editMessage($messageId)'>";
 
                     }
                 ?>

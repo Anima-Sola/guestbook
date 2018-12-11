@@ -50,11 +50,11 @@
                 
                 if($_SESSION['guestbook_isAdmin']) {
                     
-                    require_once __DIR__.'/layouts/AdminUserCabinet/adminCabinet.php';
+                    require_once __DIR__.'/layouts/AdminUserCabinet/AdminCabinet.php';
                     
                 } else {
                 
-                    require_once __DIR__.'/layouts/AdminUserCabinet/userCabinet.php';
+                    require_once __DIR__.'/layouts/AdminUserCabinet/UserCabinet.php';
                     
                 }
                 
