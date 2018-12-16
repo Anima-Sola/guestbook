@@ -1,27 +1,76 @@
-.edit-message-form {
+.edit-message__input-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 100%;
   width: 100%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 10px;
 }
 
-.edit-message-form .edit-message-form__title {
+.edit-message__input-form .edit-message__title {
   font: 18px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-align: center;
   font-weight: 600;
 }
 
-.edit-message-form .edit-message-form__info-field {
+.edit-message__input-form .edit-message__info-block .edit-message__info-field {
   font: 16px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.edit-message-form .edit-message-form__info-field p span {
+.edit-message__input-form .edit-message__info-block .edit-message__info-field p span {
   font-style: italic;
 }
 
-.edit-message-form .edit-message-form__textarea {
+.edit-message__input-form .edit-message__textarea-block .edit-message__info-field {
+  font: 16px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.edit-message__input-form .edit-message__textarea-block .edit-message__info-field p span {
+  font-style: italic;
+}
+
+.edit-message__input-form .edit-message__textarea-block .edit-message__textarea {
+  font: 14px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   width: 100%;
-  height: 70px;
+  height: 200px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   margin-bottom: 10px;
+}
+
+.edit-message__input-form .edit-message__buttons-block {
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.edit-message__input-form .edit-message__buttons-block .edit-message__info-field {
+  font: 16px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: blue;
+  font-style: italic;
+  cursor: pointer;
+  line-height: 30px;
+}
+
+.edit-message__input-form .edit-message__buttons-block .edit-message__info-field:hover {
+  text-decoration: underline;
 }
 /*# sourceMappingURL=EditMessageFormStyles.css.map */

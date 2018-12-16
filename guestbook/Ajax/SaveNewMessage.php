@@ -1,8 +1,6 @@
 <?php
     namespace guestbook;
 
-    require_once __DIR__.'/DataValidation.php';
-
     function getUserIP() {
         
         $client  = @$_SERVER['HTTP_CLIENT_IP'];
@@ -17,40 +15,35 @@
         
     }
 
-    function addMessageToDB($data) {
+    function saveMessageToDB($data) {
 
         require_once __DIR__.'/../DataBase/DBConnect.php';
-
-        $dbObject = new DBObject();
         
         $messageDate = date("H:i d-m-Y");
         $userIp = getUserIp();
         $userBrowser = $_SERVER["HTTP_USER_AGENT"];
-        $text = trim(strip_tags($data['guestbook-message'],'<a><code><i><strike><strong>'));
+        $text = trim(strip_tags($data['message_messagetext'], '<a><code><i><strike><strong>'));
+        $isMessageModerated = (isset($data['guestbook-message-is-moderated']) && ($data['guestbook-message-is-moderated'])) ? "true" : "false";
 
-        $params = array("message_username" => trim($data['guestbook-username']),
-                        "message_useremail" => trim($data['guestbook-email']),
-                        "message_userurl" => trim($data['guestbook-url']),
+        $params = array("message_username" => trim($data['message_username']),
+                        "message_useremail" => trim($data['message_useremail']),
+                        "message_userurl" => trim($data['message_userurl']),
                         "message_messagetext" => $text,
                         "message_date" => $messageDate,
                         "message_userIP" => $userIp,
                         "message_user_browser" => $userBrowser,
-                        "message_is_moderated" => "false"
+                        "message_is_moderated" => $isMessageModerated
                        );
 
-        $isSuccess = $dbObject->newMessage = $params;
+        $isSuccess = DBObject::saveMessage($params);
 
         return $isSuccess;
 
     }
     
     if(isset($_POST)) {
-                
-        $respond = validateData($_POST);
 
-        $respond['isMessageAdded'] = false;
-
-        if($respond['validationSuccess']) $respond['isMessageAdded'] = addMessageToDB($_POST);
+        $respond['isSuccess'] = saveMessageToDB($_POST);
 
         echo json_encode($respond);
     

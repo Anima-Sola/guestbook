@@ -5,7 +5,7 @@ $font-stack: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font: 36px $font-stack;   
 }
 
-.new-message {
+.guestbook-new-message {
     width: 100%;
     box-sizing: border-box;
     margin: 5px 0;
@@ -13,7 +13,7 @@ $font-stack: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     background: #F5F5F5;
     border: 1px solid rgb(206, 179, 179);
         
-    .new-message__input-form {
+    .guestbook-new-message__input-form {
         width: 100%;
         padding: 20px;
         box-sizing: border-box;

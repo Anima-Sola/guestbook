@@ -21,9 +21,9 @@
                     if($isMessageEditable) {
 
                         $messageId = $message['message_id'];
-                        $isAdmin = ($_SESSION['guestbook_isAdmin']) ? "true" : "false";
+                        $editButtonValue = ($showOnlyNotModeratedMessages) ? "Модерация сообщения" : "Редактирование сообщения";
 
-                        echo "<input class='message-edit-button' type='button' value='Редактировать сообщение' onclick='return guestbook.editMessage($messageId)'>";
+                        echo "<input class='message-edit-button' type='button' value='$editButtonValue' onclick='return guestbook.showEditMessageForm($messageId)'>";
 
                     }
                 ?>
@@ -70,7 +70,7 @@
         
                             echo "<div class='user-ismessagemoderated'>";
                                 echo "<p>";
-                                    echo ( $message['message_is_moderated'] == "1") ? "Сообщение модерировано" : "Сообщение не модерировано"; 
+                                    echo ( $message['message_is_moderated'] == "1") ? "Сообщение модерировано и опубликовано" : "Сообщение не модерировано или скрыто"; 
                                 echo "</p>";
                             echo "</div>";
         

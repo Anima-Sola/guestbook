@@ -29,19 +29,28 @@
     function validateData($data) {
         
         $result = [];
+        $result['isValidationSuccess'] = true;
         
-        $result['guestbook-username'] = validateUserName($data['guestbook-username']);
-        $result['guestbook-email'] = validateEmail($data['guestbook-email']);
-        $result['guestbook-url'] = validateUrl($data['guestbook-url']);
-        $result['guestbook-message'] = validateMessage($data['guestbook-message']);
-        $result['guestbook-captcha'] = isCaptchaCorrect($data['guestbook-captcha']);
-        $result['validationSuccess'] = true;
+        $result['data']['message_username'] = validateUserName($data['message_username']);
+        $result['data']['message_useremail'] = validateEmail($data['message_useremail']);
+        $result['data']['message_userurl'] = validateUrl($data['message_userurl']);
+        $result['data']['message_messagetext'] = validateMessage($data['message_messagetext']);
+        $result['data']['message_captcha'] = isCaptchaCorrect($data['message_captcha']);
 
-        foreach($result as $value) {
+        foreach($result['data'] as $value) {
             if($value) continue;
-            $result['validationSuccess'] = false;
+            $result['isValidationSuccess'] = false;
         }
 
         return $result;
     }
+
+    if(isset($_POST)) {
+
+        $respond = validateData($_POST);
+
+        echo json_encode($respond);
+
+    }
+
 ?>

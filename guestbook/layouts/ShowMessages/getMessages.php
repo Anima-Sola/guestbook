@@ -10,7 +10,7 @@
 
     if($showOnlyNotModeratedMessages) {
         
-        $result = DBObject::execQuery("SELECT * FROM messages WHERE message_is_moderated = false LIMIT ".($currentPage - 1) * $recordsPerPage.", $recordsPerPage");
+        $result = DBObject::execQuery("SELECT * FROM messages WHERE message_is_moderated = false LIMIT ".($currentPage - 1) * $recordsPerPage.", $recordsPerPage")['data'];
 
         if(!$result) echo "Нет новых сообщений на модерацию.";
 
@@ -22,7 +22,7 @@
 
         $userName = $_SESSION['guestbook_userName'];
 
-        $result = DBObject::execQuery("SELECT * FROM messages WHERE message_username = '$userName' LIMIT ".($currentPage - 1) * $recordsPerPage.", $recordsPerPage");
+        $result = DBObject::execQuery("SELECT * FROM messages WHERE message_username = '$userName' LIMIT ".($currentPage - 1) * $recordsPerPage.", $recordsPerPage")['data'];
 
         if(!$result) echo "Вы не оставляли сообщения.";
 
@@ -32,7 +32,7 @@
     
     if($showAllMessages) {
 
-        $result = DBObject::execQuery("SELECT * FROM messages WHERE 1 LIMIT ".($currentPage - 1) * $recordsPerPage.", $recordsPerPage");
+        $result = DBObject::execQuery("SELECT * FROM messages WHERE 1 LIMIT ".($currentPage - 1) * $recordsPerPage.", $recordsPerPage")['data'];
 
         if(!$result) echo "В гостевой книге сообщений нет.";
 
@@ -42,7 +42,7 @@
      
     $isMessageEditable = false;
 
-    $result = DBObject::execQuery("SELECT * FROM messages WHERE message_is_moderated = true LIMIT ".($currentPage - 1) * $recordsPerPage.", $recordsPerPage");
+    $result = DBObject::execQuery("SELECT * FROM messages WHERE message_is_moderated = true LIMIT ".($currentPage - 1) * $recordsPerPage.", $recordsPerPage")['data'];
 
     if(!$result) echo "В гостевой книге сообщений нет.";
 

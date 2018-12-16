@@ -13,11 +13,11 @@
 
             try {
                 $query = DBObject::$db->prepare($query);
-                $query->execute();
-                $qResult = $query->fetchAll(PDO::FETCH_ASSOC);
+                $qResult['execSuccess'] = $query->execute();
+                $qResult['data'] = $query->fetchAll(PDO::FETCH_ASSOC);
             } catch (PDOException $e) {
-                echo 'Операция не удалась: ' . $e->getMessage();
-                var_dump($e->getMessage());
+                $qResult['execSuccess'] = false;
+                $qResult['errorMsg'] = $e->getMessage();
             }
 
             return $qResult;
@@ -55,7 +55,7 @@
             try {
                 
                 DBObject::$db = new PDO($dsn, $user, $password);
-                $isDataBaseExists = DBObject::execQuery("SHOW DATABASES LIKE 'guestbook';");
+                $isDataBaseExists = DBObject::execQuery("SHOW DATABASES LIKE 'guestbook';")['execSuccess'];
 
             } catch (PDOException $e) {
                 
@@ -77,27 +77,8 @@
             return $result;
 
         }
-
-        public function __get($name)
-        {
-            $funcName = 'get'.ucfirst($name);
-            if (method_exists($this,$funcName ))
-                return $this->$funcName();
-
-            return null;
-        }
-
-        public function __set($name, $params = [])
-        {            
-            $funcName = 'set'.ucfirst($name);
-            if (method_exists($this,$funcName ))
-                return $this->$funcName($params);
-
-            return null;
-        }
-                
         
-         protected function updateRecord($params = []) {
+        protected static function updateMessage($params = []) {
                           
             $updatingFields = [];
 
@@ -111,7 +92,7 @@
              
             $query = "UPDATE messages SET ".$strUpdatingFields." WHERE message_id=".$params['message_id'].";";
              
-            $result = DBObject::execQuery($query);
+            $result = DBObject::execQuery($query)['execSuccess'];
 
             if($result) return true;
 
@@ -120,7 +101,7 @@
 
         }
 
-        protected function addRecord($params = []) {
+        protected static function addMessage($params = []) {
   
             $columns = [];
             $values = [];
@@ -137,25 +118,25 @@
 
             $query = "INSERT INTO messages (".$strColumns.") VALUES (".$strValues.");";
       
-            $result = DBObject::execQuery($query);
-
+            $result = DBObject::execQuery($query)['execSuccess'];
+            
             if($result) return true;
 
             return false;
 
         }
 
-        public function saveRecord($params = []) {
+        public static function saveMessage($params = []) {
 
-            return ($params['message_id']) ? $this->updateRecord($params) : $this->addRecord($params);
+            return ($params['message_id']) ? DBObject::updateMessage($params) : DBObject::addMessage($params);
 
         }
         
-        protected function setNewMessage ($params = []) {
+        /*protected function setNewMessage ($params = []) {
 
             return $this->saveRecord($params);
 
-        }
+        }*/
         
         /*protected function getMessageById () {
 
@@ -167,5 +148,25 @@
 
             return $result;
 
+        }*/
+
+
+        
+        /*public function __get($name)
+        {
+            $funcName = 'get'.ucfirst($name);
+            if (method_exists($this,$funcName ))
+                return $this->$funcName();
+
+            return null;
+        }
+
+        public function __set($name, $params = [])
+        {            
+            $funcName = 'set'.ucfirst($name);
+            if (method_exists($this,$funcName ))
+                return $this->$funcName($params);
+
+            return null;
         }*/
 }

@@ -8,7 +8,7 @@
 
     function showWarning(name) {
         
-        var newMessageInputForm = document.getElementById('new-message-input-form');
+        var newMessageInputForm = document.getElementById('guestbook-new-message-input-form');
         var input = newMessageInputForm.querySelector('[name="' + name + '"]');
         
         if(input) {
@@ -23,7 +23,7 @@
     
     function hideWarning(name) {
         
-        var newMessageInputForm = document.getElementById('new-message-input-form');
+        var newMessageInputForm = document.getElementById('guestbook-new-message-input-form');
         var input = newMessageInputForm.querySelector('[name="' + name + '"]');
         
         if(input) {
@@ -37,15 +37,15 @@
     
     function showWrongInputFields(data) {
         
-        (data['guestbook-captcha']) ? hideWarning('guestbook-captcha') : showWarning('guestbook-captcha');
-        (data['guestbook-message']) ? hideWarning('guestbook-message') : showWarning('guestbook-message');
-        (data['guestbook-url']) ? hideWarning('guestbook-url') : showWarning('guestbook-url');
-        (data['guestbook-email']) ? hideWarning('guestbook-email') : showWarning('guestbook-email');
-        (data['guestbook-username']) ? hideWarning('guestbook-username') : showWarning('guestbook-username');
+        (data['message_captcha']) ? hideWarning('message_captcha') : showWarning('message_captcha');
+        (data['message_messagetext']) ? hideWarning('message_messagetext') : showWarning('message_messagetext');
+        (data['message_userurl']) ? hideWarning('message_userurl') : showWarning('message_userurl');
+        (data['message_useremail']) ? hideWarning('message_useremail') : showWarning('message_useremail');
+        (data['message_username']) ? hideWarning('message_username') : showWarning('message_username');
         
     }
     
-    function clearInputValues(inputs){
+    function clearInputValues(){
         
         /*for(let i = 0; i < inputs.length; i++ ) {
             inputs[i].classList.remove('warning-border');
@@ -60,86 +60,116 @@
         setInterval("location.reload();",3000);
     
     }
-    
-    function sendNewMessage() {
-        var newMessageInputForm = document.getElementById('new-message-input-form');
-        var inputs = newMessageInputForm.querySelectorAll('[dataForSend="true"]');
-        var dataForSend = {};
+
+    function getDataForSending(parentId) {
+        var messageInputForm = document.getElementById(parentId);
+        var inputs = messageInputForm.querySelectorAll('[dataForSending="true"]');
+        var dataForSending = {};
         
         for(let i = 0; i < inputs.length; i++) {
-            dataForSend[ inputs[i].name ] = inputs[i].value;
+            dataForSending[ inputs[i].name ] = inputs[i].value;
         }
 
-        result = $.ajax({
-                    type: 'POST',
-                    url: '/guestbook/Ajax/AddNewMessage.php', 
-                    dataType: 'text',
-                    data: dataForSend,
-                    success: function(msg){
-                        result = JSON.parse(msg);
-
-                        if(result.validationSuccess) {
-
-                            if(result.isMessageAdded) {
-                                clearInputValues(inputs);
-                                modalWindow.showModalWindow('500', '200', 'px', "Сообщение успешно добавлено на модерацию.");
-                            } else {
-                                modalWindow.showModalWindow('500', '200', 'px', "Добавить сообщение не удалось. Нет связи с базой данных.");
-                            }
-
-                        } else {
-                            showWrongInputFields(result);
-                        }
-                    }, 
-                    error: function(){
-                        modalWindow.showModalWindow('500', '200', 'px', "Не удалось передать данные. Нет связи с сервером.");
-                    }        
-        });
-
-    }
-
-    function showEditMessageForm(content) {
-
-        modalWindow.showModalWindow('50', '50', '%', content);
-        
+        return dataForSending;
     }
     
-    function editMessage(messageId) {
+    function saveNewMessage(dataForSending) {
 
-        var dataForSend = {};
-        dataForSend['message_id'] = messageId;
+        $.post( '/guestbook/Ajax/SaveNewMessage.php',
+                dataForSending,
+                function() {},
+                'json')
+         .done(function (data) {
 
-        result = $.ajax({
-            type: 'POST',
-            url: '/guestbook/Ajax/GetMessageById.php', 
-            dataType: 'text',
-            data: dataForSend,
-            success: function(msg){
+            if(data.isSuccess) {
+                clearInputValues();
+                modalWindow.showModalWindow('500', '200', 'px', "<div style='text-align: center; line-height: 190px;'>Сообщение успешно добавлено на модерацию.</div>");
+            } else {
+                modalWindow.showModalWindow('500', '200', 'px', "<div style='text-align: center; line-height: 190px;'>Добавить сообщение не удалось. Нет связи с базой данных.</div>");
+            }
 
-                console.log(msg);
-                showEditMessageForm(msg);
-                /*result = JSON.parse(msg);
+         })
+         .fail(function(){
+                
+            modalWindow.showModalWindow('500', '200', 'px', "<div style='text-align: center; line-height: 190px;'>Не удалось передать данные. Нет связи с сервером.</div>");
 
-                if(!result['is_error']) {
-                    
-                    showEditMessageForm(result['data'][0]);
+         });
 
-                } else {
+    }
+    
+    //Запрос на правильность заполнения полей
+    function validateData() {
 
-                    modalWindow.showModalWindow('500', '200', 'px', "Не удалось получить данные от сервера.");
+        var dataForSending = getDataForSending('guestbook-new-message-input-form');
 
-                }*/
+        $.post( '/guestbook/Ajax/ValidateData.php',
+                dataForSending,
+                function() {},
+                'json')
+         .done(function(data){
 
-            }, 
-            error: function(){
-                modalWindow.showModalWindow('500', '200', 'px', "Нет связи с сервером.");
-            }        
-        });
+            if(data.isValidationSuccess) {
+                saveNewMessage(dataForSending);
+            } else {
+                showWrongInputFields(data.data);
+            }
+
+         })
+         .fail(function(){
+                
+            modalWindow.showModalWindow('500', '200', 'px', "<div style='text-align: center; line-height: 190px;'>Не удалось передать данные. Нет связи с сервером.</div>");
+
+         });
+
+    }
+    
+    function showEditMessageForm(messageId) {
+
+        var dataForSending = {};
+        dataForSending['message_id'] = messageId;
+
+        $.post( '/guestbook/Ajax/GetHtmlMessageById.php',
+                dataForSending,
+                function() {},
+                'json')
+         .done(function(data){
+
+            if(data.isSuccess) {
+                modalWindow.showModalWindow('50', '80', '%', data['data']);
+            } else {
+                modalWindow.showModalWindow('500', '200', 'px', "<div style='text-align: center; line-height: 190px;'>Не удалось получить данные от сервера.</div>");
+            }
+
+         })
+         .fail(function(){
+                
+            modalWindow.showModalWindow('500', '200', 'px', "<div style='text-align: center; line-height: 190px;'>Не удалось передать данные. Нет связи с сервером.</div>");
+
+         });
+         
     }
 
-    guestbook.editMessage = editMessage;
-    guestbook.sendNewMessage = sendNewMessage;
+    function editMessage(messageId, operationType) {
+        var dataForSending = getDataForSending('guestbook-edit-message-input-form');
+        dataForSending['message_id'] = messageId;
+
+        switch(operationType) {
+            case 'public': 
+                break;
+            case 'hide':
+                break;
+            case 'save':
+                break;
+            case 'delete':
+        }
+
+        console.log(dataForSending);
+    }
+    
     guestbook.getCaptcha = getCaptcha;
+    guestbook.validateData = validateData;
+    guestbook.showEditMessageForm = showEditMessageForm;
+    guestbook.editMessage = editMessage;
     
     window.guestbook = guestbook;
 

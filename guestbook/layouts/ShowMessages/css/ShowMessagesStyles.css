@@ -43,6 +43,7 @@
 
 .message .message__wrapper .message__header .message-edit-button {
   height: 30px;
+  width: 240px;
   font-weight: 600;
   font-style: italic;
 }

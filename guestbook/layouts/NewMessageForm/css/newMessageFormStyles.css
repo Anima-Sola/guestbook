@@ -3,7 +3,7 @@
   font: 36px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.new-message {
+.guestbook-new-message {
   width: 100%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -13,28 +13,28 @@
   border: 1px solid #ceb3b3;
 }
 
-.new-message .new-message__input-form {
+.guestbook-new-message .guestbook-new-message__input-form {
   width: 100%;
   padding: 20px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-.new-message .new-message__input-form .form-group {
+.guestbook-new-message .guestbook-new-message__input-form .form-group {
   width: 100%;
   min-height: 25px;
   margin-bottom: 5px;
 }
 
-.new-message .new-message__input-form .form-group__textarea {
+.guestbook-new-message .guestbook-new-message__input-form .form-group__textarea {
   min-height: 100px;
 }
 
-.new-message .new-message__input-form .form-group__captcha {
+.guestbook-new-message .guestbook-new-message__input-form .form-group__captcha {
   min-height: 50px;
 }
 
-.new-message .new-message__input-form .input-title {
+.guestbook-new-message .guestbook-new-message__input-form .input-title {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 100px;
@@ -44,7 +44,7 @@
   display: block;
 }
 
-.new-message .new-message__input-form .input-field {
+.guestbook-new-message .guestbook-new-message__input-form .input-field {
   width: calc(100% - 100px);
   float: right;
   height: 25px;
@@ -57,7 +57,7 @@
   margin-top: -3px;
 }
 
-.new-message .new-message__input-form .input-field-captcha {
+.guestbook-new-message .guestbook-new-message__input-form .input-field-captcha {
   min-height: 50px;
   float: left;
   -webkit-box-sizing: border-box;
@@ -65,7 +65,7 @@
   width: calc(50% - 185px);
 }
 
-.new-message .new-message__input-form .input-field-captcha .captcha-field {
+.guestbook-new-message .guestbook-new-message__input-form .input-field-captcha .captcha-field {
   margin: 20px 0 0 10px;
   padding: 3px;
   -webkit-box-sizing: border-box;
@@ -73,7 +73,7 @@
   width: 100%;
 }
 
-.new-message .new-message__input-form .textarea-field {
+.guestbook-new-message .guestbook-new-message__input-form .textarea-field {
   width: calc(100% - 100px);
   height: 100px;
   float: right;
@@ -86,25 +86,25 @@
   margin-top: -3px;
 }
 
-.new-message .new-message__input-form .warning-text {
+.guestbook-new-message .guestbook-new-message__input-form .warning-text {
   font: 13px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: red;
   text-align: right;
 }
 
-.new-message .new-message__input-form .warning-text__captcha {
+.guestbook-new-message .guestbook-new-message__input-form .warning-text__captcha {
   margin-left: 10px;
 }
 
-.new-message .new-message__input-form .warning-border {
+.guestbook-new-message .guestbook-new-message__input-form .warning-border {
   border: 2px solid red;
 }
 
-.new-message .new-message__input-form .hidden-warning {
+.guestbook-new-message .guestbook-new-message__input-form .hidden-warning {
   display: none;
 }
 
-.new-message .new-message__input-form .captcha-group {
+.guestbook-new-message .guestbook-new-message__input-form .captcha-group {
   min-height: 50px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -112,17 +112,17 @@
   float: left;
 }
 
-.new-message .new-message__input-form .captcha-group .captcha-img {
+.guestbook-new-message .guestbook-new-message__input-form .captcha-group .captcha-img {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 250px;
 }
 
-.new-message .new-message__input-form .captcha-group .captcha-img img {
+.guestbook-new-message .guestbook-new-message__input-form .captcha-group .captcha-img img {
   width: 100%;
 }
 
-.new-message .new-message__input-form .captcha-group .refresh-captcha-link {
+.guestbook-new-message .guestbook-new-message__input-form .captcha-group .refresh-captcha-link {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   font: 13px "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -140,7 +140,7 @@
           user-select: none;
 }
 
-.new-message .new-message__input-form .submit-button {
+.guestbook-new-message .guestbook-new-message__input-form .submit-button {
   width: calc(50% - 185px);
   float: right;
   height: 25px;

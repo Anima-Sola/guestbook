@@ -11,8 +11,14 @@
 
         if($message['execSuccess'] && $message['data']) {
 
+            ob_start();
+            $message = $message['data'][0];
+            require_once __DIR__.'/../layouts/EditMessageForm/EditMessageForm.php';
+            $output = ob_get_contents(); 
+            ob_end_clean();
+            
             $respond['isSuccess'] = true;
-            $respond['data'] = $message['data'];
+            $respond['data'] = $output;
 
         } else {
 

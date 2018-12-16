@@ -1,28 +1,70 @@
 $font-stack: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-.edit-message-form {
+.edit-message__input-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
     width: 100%;
     box-sizing: border-box;
     padding: 10px;
 
-    .edit-message-form__title {
+    .edit-message__title {
         font: 18px $font-stack;
         text-align: center;
         font-weight: 600;
     }
 
-    .edit-message-form__info-field {
-        font: 16px $font-stack;
+    .edit-message__info-block {
 
-        p span {
-            font-style: italic;
+        .edit-message__info-field {
+            font: 16px $font-stack;
+
+            p span {
+                font-style: italic;
+            }
         }
+
     }
 
-    .edit-message-form__textarea {
+    .edit-message__textarea-block {
+
+        .edit-message__info-field {
+            font: 16px $font-stack;
+
+            p span {
+                font-style: italic;
+            }
+        }
+    
+        .edit-message__textarea {
+            font: 14px $font-stack;
+            width: 100%;
+            height: 200px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+    }
+
+    .edit-message__buttons-block {
         width: 100%;
-        height: 70px;
-        margin-bottom: 10px;
-    }
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
 
+        .edit-message__info-field {
+            font: 16px $font-stack;
+            color: blue;
+            font-style: italic;
+            cursor: pointer;
+            line-height: 30px;
+        }
+
+        .edit-message__info-field:hover {
+            text-decoration: underline;
+        }
+
+    }
 }

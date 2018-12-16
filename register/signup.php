@@ -178,9 +178,9 @@
     </main>
     
 <?php
-    if($isLoginExists && !$isEmailExists) echo "<script> modalWindow.showModalWindow('500', '200', 'px', 'Пользователь с таким Логином уже существует!'); </script>";
-    if($isEmailExists && !$isLoginExists) echo "<script> modalWindow.showModalWindow('500', '200', 'px', 'Пользователь с таким Email уже существует!'); </script>";
-    if($isEmailExists && $isLoginExists) echo "<script> modalWindow.showModalWindow('500', '200', 'px', 'Пользователь с таким Логином и Email уже существует!'); </script>";
+    if($isLoginExists && !$isEmailExists) echo "<script> modalWindow.showModalWindow('500', '200', 'px', '<div style='text-align: center; line-height: 190px;'>Пользователь с таким Логином уже существует!</div>'); </script>";
+    if($isEmailExists && !$isLoginExists) echo "<script> modalWindow.showModalWindow('500', '200', 'px', '<div style='text-align: center; line-height: 190px;'>Пользователь с таким Email уже существует!</div>'); </script>";
+    if($isEmailExists && $isLoginExists) echo "<script> modalWindow.showModalWindow('500', '200', 'px', '<div style='text-align: center; line-height: 190px;'>Пользователь с таким Логином и Email уже существует!</div>'); </script>";
     if($isRegisterSuccess) {
 		//echo "<script> modalWindow.showModalWindow('500', '200', 'px', 'Вы успешно зарегистрированы!'); </script>";
 		echo "<script> window.location.replace('/'); </script>";
