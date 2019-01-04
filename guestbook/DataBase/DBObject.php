@@ -35,9 +35,9 @@
                                                                        `message_messagetext` TEXT NULL DEFAULT NULL ,
                                                                        `message_adminreply` TEXT NULL DEFAULT NULL ,  
                                                                        `message_date` VARCHAR(16) NULL DEFAULT NULL ,  
-                                                                       `message_userIP` VARCHAR(15) NULL DEFAULT NULL , 
+                                                                       `message_userIP` VARCHAR(39) NULL DEFAULT NULL , 
                                                                        `message_user_browser` TEXT NULL DEFAULT NULL ,  
-                                                                       `message_is_moderated` BOOLEAN NULL DEFAULT NULL ,    
+                                                                       `message_is_moderated` BOOLEAN NULL DEFAULT '0' ,    
                                                                        PRIMARY KEY  (`message_id`)) ENGINE = InnoDB;");
         }
         
@@ -83,11 +83,9 @@
             $updatingFields = [];
 
             foreach($params as $param => $value) {
-                if($value) $updatingFields[] = $param."='".$value."'";
+                $updatingFields[] = $param."='".$value."'";
             }
              
-            array_shift($updatingFields);
-            
             $strUpdatingFields = implode(", ", $updatingFields);
              
             $query = "UPDATE messages SET ".$strUpdatingFields." WHERE message_id=".$params['message_id'].";";
@@ -98,19 +96,16 @@
 
             return false;
 
-
         }
 
-        protected static function addMessage($params = []) {
+        protected static function insertMessage($params = []) {
   
             $columns = [];
             $values = [];
 
             foreach($params as $param => $value) {
-                if($value) {
-                    $columns[] = $param;
-                    $values[] = $value;
-                }
+                $columns[] = $param;
+                $values[] = $value;
             }
 
             $strColumns = implode(", ", $columns);
@@ -128,7 +123,7 @@
 
         public static function saveMessage($params = []) {
 
-            return ($params['message_id']) ? DBObject::updateMessage($params) : DBObject::addMessage($params);
+            return ($params['message_id']) ? DBObject::updateMessage($params) : DBObject::insertMessage($params);
 
         }
         

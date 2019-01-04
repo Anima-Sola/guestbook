@@ -23,7 +23,6 @@
         $userIp = getUserIp();
         $userBrowser = $_SERVER["HTTP_USER_AGENT"];
         $text = trim(strip_tags($data['message_messagetext'], '<a><code><i><strike><strong>'));
-        $isMessageModerated = (isset($data['guestbook-message-is-moderated']) && ($data['guestbook-message-is-moderated'])) ? "true" : "false";
 
         $params = array("message_username" => trim($data['message_username']),
                         "message_useremail" => trim($data['message_useremail']),
@@ -32,7 +31,6 @@
                         "message_date" => $messageDate,
                         "message_userIP" => $userIp,
                         "message_user_browser" => $userBrowser,
-                        "message_is_moderated" => $isMessageModerated
                        );
 
         $isSuccess = DBObject::saveMessage($params);
@@ -47,5 +45,11 @@
 
         echo json_encode($respond);
     
+    } else {
+        
+        $respond['isSuccess'] = false;
+
+        echo json_encode($respond);
+
     }
 ?>

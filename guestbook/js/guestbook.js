@@ -44,22 +44,6 @@
         (data['message_username']) ? hideWarning('message_username') : showWarning('message_username');
         
     }
-    
-    function clearInputValues(){
-        
-        /*for(let i = 0; i < inputs.length; i++ ) {
-            inputs[i].classList.remove('warning-border');
-            inputs[i].nextElementSibling.classList.add('hidden-warning');
-            inputs[i].value = "";
-        }
-        
-        getCaptcha();*/
-        
-        //location.reload();
-        
-        setInterval("location.reload();",3000);
-    
-    }
 
     function getDataForSending(parentId) {
         var messageInputForm = document.getElementById(parentId);
@@ -72,28 +56,30 @@
 
         return dataForSending;
     }
-    
+
+    function makePostRequest(dataForSending, url, callback) {
+
+        $.post( url, dataForSending, function() {}, 'json')
+         .done( callback )
+         .fail(function(){
+            modalWindow.showModalWindow('600', '200', 'px', "<div style='text-align: center; line-height: 190px;'>Не удалось передать данные. Нет связи с сервером.</div>");
+         });
+
+    }
+            
     function saveNewMessage(dataForSending) {
 
-        $.post( '/guestbook/Ajax/SaveNewMessage.php',
-                dataForSending,
-                function() {},
-                'json')
-         .done(function (data) {
+        makePostRequest(dataForSending, '/guestbook/Ajax/SaveNewMessage.php', function (data) {
 
             if(data.isSuccess) {
-                clearInputValues();
-                modalWindow.showModalWindow('500', '200', 'px', "<div style='text-align: center; line-height: 190px;'>Сообщение успешно добавлено на модерацию.</div>");
+                setInterval("location.reload();", 2000);
+                modalWindow.showModalWindow('600', '200', 'px', 
+                    "<div style='text-align: center; line-height: 190px;'>Сообщение успешно добавлено на модерацию. Страница будет обновлена автоматически.</div>");
             } else {
-                modalWindow.showModalWindow('500', '200', 'px', "<div style='text-align: center; line-height: 190px;'>Добавить сообщение не удалось. Нет связи с базой данных.</div>");
+                modalWindow.showModalWindow('600', '200', 'px', "<div style='text-align: center; line-height: 190px;'>Добавить сообщение не удалось. Нет связи с базой данных.</div>");
             }
 
-         })
-         .fail(function(){
-                
-            modalWindow.showModalWindow('500', '200', 'px', "<div style='text-align: center; line-height: 190px;'>Не удалось передать данные. Нет связи с сервером.</div>");
-
-         });
+        });
 
     }
     
@@ -102,73 +88,98 @@
 
         var dataForSending = getDataForSending('guestbook-new-message-input-form');
 
-        $.post( '/guestbook/Ajax/ValidateData.php',
-                dataForSending,
-                function() {},
-                'json')
-         .done(function(data){
+        makePostRequest(dataForSending, '/guestbook/Ajax/ValidateData.php', function(data){
 
-            if(data.isValidationSuccess) {
+            if(data.isSuccess) {
                 saveNewMessage(dataForSending);
             } else {
                 showWrongInputFields(data.data);
             }
 
-         })
-         .fail(function(){
-                
-            modalWindow.showModalWindow('500', '200', 'px', "<div style='text-align: center; line-height: 190px;'>Не удалось передать данные. Нет связи с сервером.</div>");
-
-         });
+        });
 
     }
     
-    function showEditMessageForm(messageId) {
+    // Подказать форму для редактирования сообщения. Вызывается из файла \layouts\ShowMessages\ShowMessages.php
+    function showEditingMessage(messageId) {
 
         var dataForSending = {};
         dataForSending['message_id'] = messageId;
 
-        $.post( '/guestbook/Ajax/GetHtmlMessageById.php',
-                dataForSending,
-                function() {},
-                'json')
-         .done(function(data){
+        makePostRequest(dataForSending, '/guestbook/Ajax/GetHtmlMessageById.php', function(data){
 
             if(data.isSuccess) {
                 modalWindow.showModalWindow('50', '80', '%', data['data']);
             } else {
-                modalWindow.showModalWindow('500', '200', 'px', "<div style='text-align: center; line-height: 190px;'>Не удалось получить данные от сервера.</div>");
+                modalWindow.showModalWindow('600', '200', 'px', "<div style='text-align: center; line-height: 190px;'>Не удалось получить данные от сервера.</div>");
             }
 
-         })
-         .fail(function(){
-                
-            modalWindow.showModalWindow('500', '200', 'px', "<div style='text-align: center; line-height: 190px;'>Не удалось передать данные. Нет связи с сервером.</div>");
+        });
 
-         });
-         
+    }
+    
+    function updateMessage(dataForSending) {
+
+        makePostRequest(dataForSending, '/guestbook/Ajax/UpdateMessage.php', function(data) {
+            
+            modalWindow.closeModalWindow();
+
+            if(data.isSuccess) {
+                setInterval("location.reload();", 2000);
+                modalWindow.showModalWindow('600', '200', 'px', 
+                    "<div style='text-align: center; line-height: 190px;'><p>Изменения успешно внесены. Страница будет обновлена автоматически.</p></div>");
+            } else {
+                modalWindow.showModalWindow('600', '200', 'px', "<div style='text-align: center; line-height: 190px;'>Не удалось внести изменения.</div>");
+            }
+
+        });
+
     }
 
+    function deleteMessage(dataForSending) {
+
+        makePostRequest(dataForSending, '/guestbook/Ajax/DeleteMessage.php', function(data) {
+
+            modalWindow.closeModalWindow();
+
+            if(data.isSuccess) {
+                setInterval("location.reload();", 2000);
+                modalWindow.showModalWindow('600', '200', 'px', 
+                    "<div style='text-align: center; line-height: 190px;'>Сообщение успешно удалено. Страница будет обновлена автоматически.</div>");
+            } else {
+                modalWindow.showModalWindow('600', '200', 'px', "<div style='text-align: center; line-height: 190px;'>Не удалось удалить сообщение.</div>");
+            }
+
+        });
+
+    }
+    
     function editMessage(messageId, operationType) {
         var dataForSending = getDataForSending('guestbook-edit-message-input-form');
         dataForSending['message_id'] = messageId;
 
         switch(operationType) {
-            case 'public': 
+            case 'public':
+                dataForSending['message_is_moderated'] = "1"; 
+                updateMessage(dataForSending);
                 break;
+            case 'send':
             case 'hide':
+                dataForSending['message_is_moderated'] = "0";
+                updateMessage(dataForSending);
                 break;
             case 'save':
+                updateMessage(dataForSending);
                 break;
             case 'delete':
+                isDelete = confirm('Вы действительно хотите удалить сообщение?');
+                if(isDelete) deleteMessage(dataForSending);
         }
-
-        console.log(dataForSending);
     }
     
     guestbook.getCaptcha = getCaptcha;
     guestbook.validateData = validateData;
-    guestbook.showEditMessageForm = showEditMessageForm;
+    guestbook.showEditingMessage = showEditingMessage;
     guestbook.editMessage = editMessage;
     
     window.guestbook = guestbook;

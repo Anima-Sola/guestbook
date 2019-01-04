@@ -22,7 +22,7 @@
 
         $userName = $_SESSION['guestbook_userName'];
 
-        $result = DBObject::execQuery("SELECT * FROM messages WHERE message_username = '$userName' LIMIT ".($currentPage - 1) * $recordsPerPage.", $recordsPerPage")['data'];
+        $result = DBObject::execQuery("SELECT * FROM messages WHERE BINARY message_username = '$userName' LIMIT ".($currentPage - 1) * $recordsPerPage.", $recordsPerPage")['data'];
 
         if(!$result) echo "Вы не оставляли сообщения.";
 

@@ -5,9 +5,7 @@
 
         require_once __DIR__.'/../DataBase/DBConnect.php';
 
-        $messageId = $_POST['message_id'];
-
-        $message = DBObject::getMessageById($messageId);
+        $message = DBObject::getMessageById($_POST['message_id']);
 
         if($message['execSuccess'] && $message['data']) {
 

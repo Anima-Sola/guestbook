@@ -23,7 +23,7 @@
                         $messageId = $message['message_id'];
                         $editButtonValue = ($showOnlyNotModeratedMessages) ? "Модерация сообщения" : "Редактирование сообщения";
 
-                        echo "<input class='message-edit-button' type='button' value='$editButtonValue' onclick='return guestbook.showEditMessageForm($messageId)'>";
+                        echo "<input class='message-edit-button' type='button' value='$editButtonValue' onclick='return guestbook.showEditingMessage($messageId)'>";
 
                     }
                 ?>

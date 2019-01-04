@@ -5,18 +5,13 @@
 
         require_once __DIR__.'/../DataBase/DBConnect.php';
 
-        $message = DBObject::getMessageById($_POST['message_id']);
+        $params = [];
 
-        if($message['execSuccess'] && $message['data']) {
-
-            $respond['isSuccess'] = true;
-            $respond['data'] = $message['data'];
-
-        } else {
-
-            $respond['isSuccess'] = false;
-
+        foreach($_POST as $key => $value) {
+            $params[$key] = $value;
         }
+
+        $respond['isSuccess'] = DBObject::saveMessage($params);
 
         echo json_encode($respond);
     

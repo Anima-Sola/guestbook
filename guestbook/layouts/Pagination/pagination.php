@@ -1,4 +1,6 @@
 <?php
+    namespace guestbook;
+
     function getPagesArray($numOfRecords = 10, $currentPage = 1, $recordsPerPage = 10) {
 
         $result = [];

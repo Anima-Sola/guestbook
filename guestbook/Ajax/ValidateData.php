@@ -29,7 +29,7 @@
     function validateData($data) {
         
         $result = [];
-        $result['isValidationSuccess'] = true;
+        $result['isSuccess'] = true;
         
         $result['data']['message_username'] = validateUserName($data['message_username']);
         $result['data']['message_useremail'] = validateEmail($data['message_useremail']);
@@ -39,7 +39,7 @@
 
         foreach($result['data'] as $value) {
             if($value) continue;
-            $result['isValidationSuccess'] = false;
+            $result['isSuccess'] = false;
         }
 
         return $result;
@@ -48,6 +48,12 @@
     if(isset($_POST)) {
 
         $respond = validateData($_POST);
+
+        echo json_encode($respond);
+
+    } else {
+
+        $respond['isSuccess'] = false;
 
         echo json_encode($respond);
 

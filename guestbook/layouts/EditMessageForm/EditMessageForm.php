@@ -64,12 +64,18 @@
                     echo "<span class='edit-message__info-field' onclick=\"return guestbook.editMessage($messageId, 'public');\"><p>Опубликовать</p></span>";
                 
                 }
+
+                echo "<span class='edit-message__info-field' onclick=\"return guestbook.editMessage($messageId, 'save');\"><p>Сохранить</p></span>";
                                
+            } else {
+                
+                echo "<span class='edit-message__info-field' onclick=\"return guestbook.editMessage($messageId, 'send');\"><p>Отправить</p></span>";
+                
             }
+
         ?>
-        <span class="edit-message__info-field" onclick="return guestbook.editMessage(<?= $messageId ?>, 'save');"><p>Сохранить</p></span>
         <span class="edit-message__info-field" onclick="return guestbook.editMessage(<?= $messageId ?>, 'delete');"><p>Удалить</p></span>
-        <span class="edit-message__info-field" onclick="modalWindow.closeModalWindow();"><p>Закрыть окно</p></span>
+        <span class="edit-message__info-field" onclick="return modalWindow.closeModalWindow();"><p>Закрыть окно</p></span>
     </div>
 
 </div>
