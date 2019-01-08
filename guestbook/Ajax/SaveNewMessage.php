@@ -19,10 +19,12 @@
 
         require_once __DIR__.'/../DataBase/DBConnect.php';
         
-        $messageDate = date("H:i d-m-Y");
+        $messageDate = time();
         $userIp = getUserIp();
         $userBrowser = $_SERVER["HTTP_USER_AGENT"];
-        $text = trim(strip_tags($data['message_messagetext'], '<a><code><i><strike><strong>'));
+        $text = substr( $data['message_messagetext'], 0, 10000).'...';
+        $text = trim( strip_tags( $text, '<a><code><i><strike><strong>') );
+        $text = addslashes($text);
 
         $params = array("message_username" => trim($data['message_username']),
                         "message_useremail" => trim($data['message_useremail']),

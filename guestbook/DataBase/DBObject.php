@@ -34,10 +34,10 @@
                                                                        `message_userurl` VARCHAR(100) NULL DEFAULT NULL ,  
                                                                        `message_messagetext` TEXT NULL DEFAULT NULL ,
                                                                        `message_adminreply` TEXT NULL DEFAULT NULL ,  
-                                                                       `message_date` VARCHAR(16) NULL DEFAULT NULL ,  
+                                                                       `message_date` INT(11) DEFAULT NULL ,  
                                                                        `message_userIP` VARCHAR(39) NULL DEFAULT NULL , 
                                                                        `message_user_browser` TEXT NULL DEFAULT NULL ,  
-                                                                       `message_is_moderated` BOOLEAN NULL DEFAULT '0' ,    
+                                                                       `message_is_moderated` TINYINT(1) DEFAULT '0' ,    
                                                                        PRIMARY KEY  (`message_id`)) ENGINE = InnoDB;");
         }
         
@@ -55,7 +55,7 @@
             try {
                 
                 DBObject::$db = new PDO($dsn, $user, $password);
-                $isDataBaseExists = DBObject::execQuery("SHOW DATABASES LIKE 'guestbook';")['execSuccess'];
+                $isDataBaseExists = DBObject::execQuery("SHOW DATABASES LIKE 'guestbook';")['data'];
 
             } catch (PDOException $e) {
                 
@@ -83,7 +83,7 @@
             $updatingFields = [];
 
             foreach($params as $param => $value) {
-                $updatingFields[] = $param."='".$value."'";
+                $updatingFields[] = $param.'="'.$value.'"';
             }
              
             $strUpdatingFields = implode(", ", $updatingFields);
@@ -109,7 +109,7 @@
             }
 
             $strColumns = implode(", ", $columns);
-            $strValues = "'".implode("', '", $values)."'";
+            $strValues = '"'.implode('", "', $values).'"';
 
             $query = "INSERT INTO messages (".$strColumns.") VALUES (".$strValues.");";
       
@@ -126,42 +126,5 @@
             return ($params['message_id']) ? DBObject::updateMessage($params) : DBObject::insertMessage($params);
 
         }
-        
-        /*protected function setNewMessage ($params = []) {
-
-            return $this->saveRecord($params);
-
-        }*/
-        
-        /*protected function getMessageById () {
-
-            $id = 1;
-
-            $query = "SELECT * FROM messages WHERE message_id=$id";
-
-            $result = DBObject::execQuery($query);
-
-            return $result;
-
-        }*/
-
-
-        
-        /*public function __get($name)
-        {
-            $funcName = 'get'.ucfirst($name);
-            if (method_exists($this,$funcName ))
-                return $this->$funcName();
-
-            return null;
-        }
-
-        public function __set($name, $params = [])
-        {            
-            $funcName = 'set'.ucfirst($name);
-            if (method_exists($this,$funcName ))
-                return $this->$funcName($params);
-
-            return null;
-        }*/
+        f
 }

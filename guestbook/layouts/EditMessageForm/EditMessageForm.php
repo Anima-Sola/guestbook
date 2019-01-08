@@ -20,7 +20,7 @@
     <div class="edit-message__info-block">
         <div class="edit-message__info-field"><p>Имя пользователя: <span><?= $message['message_username'] ?></span></p></div>
         <div class="edit-message__info-field"><p>Email пользователя: <span><?= $message['message_useremail'] ?></span></p></div>
-        <div class="edit-message__info-field"><p>Дата сообщения: <span><?= $message['message_date'] ?></span></p></div>
+        <div class="edit-message__info-field"><p>Дата сообщения: <span><?= date("d.m.Y H:i", $message['message_date']) ?></span></p></div>
         <div class="edit-message__info-field"><p>Сайт пользователя: <span><?= $message['message_userurl'] ?></span></p></div>
         <div class="edit-message__info-field"><p>IP адрес пользователя: <span><?= $message['message_userIP'] ?></span></p></div>
         <div class="edit-message__info-field"><p>Браузер пользователя: <span><?= $message['message_user_browser'] ?></span></p></div>
@@ -43,7 +43,7 @@
 
             } else {
 
-                echo "<br><div class='edit-message__textarea'>$adminReply</div>";
+                echo "<br><textarea class='edit-message__textarea' disabled>$adminReply</textarea>";
 
             }
         ?>

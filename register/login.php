@@ -18,7 +18,7 @@
 
                 $_SESSION['guestbook_userName'] = $user->login;
                 $_SESSION['guestbook_userEmail'] = $user->email;
-                if($user->login == "admin") $_SESSION['guestbook_adminName'] = $user->login;
+                $_SESSION['guestbook_adminName'] = "admin";
 
                 $isUserAuthorized = true;
 				//echo '<div style="color:dreen;">Вы авторизованы!<br/> Можете перейти на <a href="/">главную</a> страницу.</div><hr>';

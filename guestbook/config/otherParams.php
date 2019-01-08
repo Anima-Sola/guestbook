@@ -2,6 +2,6 @@
 
     return [
 
-        'recordsPerPage' => 20,
+        'recordsPerPage' => 25,
 
     ];

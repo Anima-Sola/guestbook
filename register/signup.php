@@ -90,7 +90,7 @@
 				$_SESSION['logged_user'] = $user;
 				$_SESSION['guestbook_userName'] = $user->login;
 				$_SESSION['guestbook_userEmail'] = $user->email;
-				if($user->login == "admin") $_SESSION['guestbook_adminName'] = $user->login;
+				$_SESSION['guestbook_adminName'] = "admin";
                 //echo '<div style="color:dreen;">Вы успешно зарегистрированы!</div><hr>';
 
                 $isRegisterSuccess = true;

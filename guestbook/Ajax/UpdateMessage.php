@@ -8,7 +8,7 @@
         $params = [];
 
         foreach($_POST as $key => $value) {
-            $params[$key] = $value;
+            $params[$key] = addslashes($value);
         }
 
         $respond['isSuccess'] = DBObject::saveMessage($params);

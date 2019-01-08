@@ -11,7 +11,7 @@
                     <p><?= $message['message_username'] ?></p>
                 </div>
                 <div class="message-date">
-                    <p><?= $message['message_date'] ?></p>
+                    <p><?= date("d.m.Y H:i", $message['message_date']) ?></p>
                 </div>
                 <div class="user-url">
                     <p><?= $message['message_userurl'] ?></p>
@@ -34,13 +34,13 @@
                     <p>Сообщение посетителя:</p>
                 </div>
                 <div class="message-text">
-                    <p><?= $message['message_messagetext'] ?></p>
+                    <p><?= str_replace(array("\r\n", "\r", "\n"), '<br>', $message['message_messagetext']); ?></p>
                 </div>
                 <?php
-                    if(isset($message['message_adminreply'])) {
+                    if(isset($message['message_adminreply']) && $message['message_adminreply']) {
                         echo "<p class='admin-reply-title'>Ответ администратора:</p>";
                         echo "<div><p>";
-                            echo $message['message_adminreply'];
+                            echo str_replace(array("\r\n", "\r", "\n"), '<br>', $message['message_adminreply']);
                         echo "</p></div>";
                     }
 
@@ -82,5 +82,7 @@
     </div>
 
 <? 
-} 
+}
+require_once __DIR__.'/../../modules/Pagination/Pagination.php';
+new Pagination($_SESSION['guestbook_numOfRecords'], $_SESSION['guestbook_currentPage'], $_SESSION['guestbook_recordsPerPage']);
 ?>

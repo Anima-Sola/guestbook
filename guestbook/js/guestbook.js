@@ -74,7 +74,7 @@
             if(data.isSuccess) {
                 setInterval("location.reload();", 2000);
                 modalWindow.showModalWindow('600', '200', 'px', 
-                    "<div style='text-align: center; line-height: 190px;'>Сообщение успешно добавлено на модерацию. Страница будет обновлена автоматически.</div>");
+                    "<div style='text-align: center; line-height: 190px;'>Сообщение добавлено на модерацию. Страница будет обновлена автоматически.</div>");
             } else {
                 modalWindow.showModalWindow('600', '200', 'px', "<div style='text-align: center; line-height: 190px;'>Добавить сообщение не удалось. Нет связи с базой данных.</div>");
             }
@@ -176,11 +176,31 @@
                 if(isDelete) deleteMessage(dataForSending);
         }
     }
+
+    function saveCurrentTab(elem) {
+
+        localStorage.savedTab = elem.htmlFor;
+        location.replace('/');
+
+    }
+
+    function restoreCurrentTab() {
+        
+        savedTab = localStorage.savedTab;
+
+        if(savedTab) {
+            savedTabElem = document.getElementById(savedTab);
+            if(savedTabElem) savedTabElem.checked = true;
+        }
+
+    }
     
     guestbook.getCaptcha = getCaptcha;
     guestbook.validateData = validateData;
     guestbook.showEditingMessage = showEditingMessage;
     guestbook.editMessage = editMessage;
+    guestbook.saveCurrentTab = saveCurrentTab;
+    guestbook.restoreCurrentTab = restoreCurrentTab;
     
     window.guestbook = guestbook;
 
@@ -189,4 +209,5 @@
 
 document.addEventListener("DOMContentLoaded", function() {
     guestbook.getCaptcha();
+    guestbook.restoreCurrentTab();
 });

@@ -16,8 +16,6 @@
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta http-equiv="Cache-Control" content="private">
     <link rel="stylesheet" href="/css/style.css">
-    <script src="/js/myscript.js"></script>
-    <!--<script src="/js/jquery-3.3.1.min.js"></script>-->
     <?= $guestBook->insertCssLinks(); ?>
     <?= $guestBook->insertJsLinks(); ?>
     
@@ -39,12 +37,14 @@
             </nav>
         </header>
         <section class="wrapper">
-            <?php 
-                $guestBook->showGuestBook(); 
-            ?>
+            <div class="guestbook">
+                <?php 
+                    $guestBook->showGuestBook(); 
+                ?>
+            <div>
         </section>
         <footer class="footer">
-            <p>Copyright © 2018</p>
+            <p>Copyright © 2019</p>
         </footer>
     </main>
 </body>
