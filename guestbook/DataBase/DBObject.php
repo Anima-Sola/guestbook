@@ -28,17 +28,33 @@
             
             DBObject::execQuery("USE guestbook;");
 
-            DBObject::execQuery("CREATE TABLE `guestbook`.`messages` ( `message_id` INT NOT NULL AUTO_INCREMENT ,   
-                                                                       `message_username` VARCHAR(100) NULL DEFAULT NULL ,  
-                                                                       `message_useremail` VARCHAR(100) NULL DEFAULT NULL ,  
-                                                                       `message_userurl` VARCHAR(100) NULL DEFAULT NULL ,  
-                                                                       `message_messagetext` TEXT NULL DEFAULT NULL ,
-                                                                       `message_adminreply` TEXT NULL DEFAULT NULL ,  
-                                                                       `message_date` INT(11) DEFAULT NULL ,  
-                                                                       `message_userIP` VARCHAR(39) NULL DEFAULT NULL , 
-                                                                       `message_user_browser` TEXT NULL DEFAULT NULL ,  
-                                                                       `message_is_moderated` TINYINT(1) DEFAULT '0' ,    
-                                                                       PRIMARY KEY  (`message_id`)) ENGINE = InnoDB;");
+            DBObject::execQuery("CREATE TABLE `messages` ( `message_id` int(11) NOT NULL,
+                                                           `message_username` varchar(100) DEFAULT NULL,
+                                                           `message_useremail` varchar(100) DEFAULT NULL,
+                                                           `message_userurl` varchar(100) DEFAULT NULL,
+                                                           `message_messagetext` text,
+                                                           `message_adminreply` text,
+                                                           `message_date` int(11) DEFAULT NULL,
+                                                           `message_userIP` varchar(39) DEFAULT NULL,
+                                                           `message_user_browser` text,
+                                                           `message_is_moderated` tinyint(1) DEFAULT '0'
+                                                        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
+
+
+            DBObject::execQuery("ALTER TABLE `messages` ADD PRIMARY KEY (`message_id`);");
+
+            DBObject::execQuery("ALTER TABLE `messages` MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1; COMMIT;");
+
+            DBObject::execQuery("CREATE TABLE `users` ( `id` int(11) UNSIGNED NOT NULL,
+                                                        `login` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+                                                        `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+                                                        `password` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+                                                      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;");
+
+            DBObject::execQuery("ALTER TABLE `users` ADD PRIMARY KEY (`id`);");
+
+            DBObject::execQuery("ALTER TABLE `users` MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1; COMMIT;");
+
         }
         
         
@@ -126,5 +142,5 @@
             return ($params['message_id']) ? DBObject::updateMessage($params) : DBObject::insertMessage($params);
 
         }
-        f
+        
 }

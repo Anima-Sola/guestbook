@@ -48,7 +48,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/../css/style.css">
-    <script src='/js/ModalWindow.js'></script>
 	<title>Гостевая книга</title>
 </head>
 <body>
@@ -93,8 +92,6 @@
     </main>
     <?php
         if($isUserAuthorized) echo "<script> window.location.replace('/'); </script>";
-        
-        //echo "<script> modalWindow.showModalWindow('500', '200', 'px', 'Добро пожаловать на сайт!'); </script>";
     ?>    
 </body>
 </html>
