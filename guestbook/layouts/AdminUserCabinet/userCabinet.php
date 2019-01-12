@@ -1,4 +1,5 @@
 <?php
+    //Кабинет пользователя для редактирования сообщений
     namespace guestbook;
 ?>
 <div class="tabs">

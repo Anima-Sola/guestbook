@@ -2,10 +2,13 @@
 
     guestbook = {};
     
+    //Загрузка изображения каптчи
     function getCaptcha() {
         $('#captcha').load('/guestbook/modules/Captcha/BuildCaptcha.php');
     }
 
+    //Функция отображения предупреждения после валидации, что в поле формы ввода нового сообщения
+    //введены неправильные данные
     function showWarning(name) {
         
         var newMessageInputForm = document.getElementById('guestbook-new-message-input-form');
@@ -21,6 +24,8 @@
         
     }
     
+    //Функция скрытия предупреждения после валидации, что в поле формы ввода нового сообщения
+    //введены неправильные данные
     function hideWarning(name) {
         
         var newMessageInputForm = document.getElementById('guestbook-new-message-input-form');
@@ -35,6 +40,7 @@
         
     }
     
+    //Показать/скрыть предупреждения для каждого поля после валидации
     function showWrongInputFields(data) {
         
         (data['message_captcha']) ? hideWarning('message_captcha') : showWarning('message_captcha');
@@ -45,6 +51,9 @@
         
     }
 
+    //Получение данных для отправки через ajax-запрос
+    //Внутри элементы с id = parendId ищутся элементы в аттрибутом dataForSending = true (input, textarea)
+    //И все значения value этим элементов помещаются в массив, который возвращается
     function getDataForSending(parentId) {
         var messageInputForm = document.getElementById(parentId);
         var inputs = messageInputForm.querySelectorAll('[dataForSending="true"]');
@@ -57,6 +66,7 @@
         return dataForSending;
     }
 
+    //Передать данные post запросом на указанный url
     function makePostRequest(dataForSending, url, callback) {
 
         $.post( url, dataForSending, function() {}, 'json')
@@ -67,6 +77,7 @@
 
     }
             
+    //Запрос добавления нового сообщения в базу данных
     function saveNewMessage(dataForSending) {
 
         makePostRequest(dataForSending, '/guestbook/Ajax/SaveNewMessage.php', function (data) {
@@ -84,6 +95,8 @@
     }
     
     //Запрос на правильность заполнения полей
+    //Если все правильно, вызывается функция для сохранения нового сообщения
+    //Вызывается из файла \layouts\NewMessaggeForm\NewMessageForm.php
     function validateData() {
 
         var dataForSending = getDataForSending('guestbook-new-message-input-form');
@@ -100,7 +113,8 @@
 
     }
     
-    // Подказать форму для редактирования сообщения. Вызывается из файла \layouts\ShowMessages\ShowMessages.php
+    //Показать форму для редактирования сообщения. Вызывается из файла \layouts\ShowMessages\ShowMessages.php
+    //через файл GetHtmlMessageById.php
     function showEditingMessage(messageId) {
 
         var dataForSending = {};
@@ -118,6 +132,7 @@
 
     }
     
+    //Обновить сообщение в базе данных
     function updateMessage(dataForSending) {
 
         makePostRequest(dataForSending, '/guestbook/Ajax/UpdateMessage.php', function(data) {
@@ -136,6 +151,7 @@
 
     }
 
+    //Удалить сообщение из базы данных
     function deleteMessage(dataForSending) {
 
         makePostRequest(dataForSending, '/guestbook/Ajax/DeleteMessage.php', function(data) {
@@ -154,6 +170,7 @@
 
     }
     
+    //Редактировать сообщение в базе данных. Вызывается из файла \layouts\EditMessageForm\EditMessageForm.php
     function editMessage(messageId, operationType) {
         var dataForSending = getDataForSending('guestbook-edit-message-input-form');
         dataForSending['message_id'] = messageId;
@@ -177,6 +194,8 @@
         }
     }
 
+    //Сохранение текущей вкладки для личных кабинетов авторизованного пользователя и админа
+    //Вызывается из файла AdminCabinet.php и UserCabinet.php
     function saveCurrentTab(elem) {
 
         localStorage.savedTab = elem.htmlFor;
@@ -184,6 +203,8 @@
 
     }
 
+    //Восстановление после закрытия текущей вкладки для личных кабинетов авторизованного пользователя и админа
+    //Вызывается из файла AdminCabinet.php и UserCabinet.php
     function restoreCurrentTab() {
         
         savedTab = localStorage.savedTab;

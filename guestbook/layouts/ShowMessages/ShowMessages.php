@@ -1,4 +1,5 @@
 <?php
+    //Вывод списка сообщений
     namespace guestbook;
 
     $messages = require __DIR__.'/getMessages.php';
@@ -18,6 +19,8 @@
                 </div>
 
                 <?php
+                    
+                    //Если зарегистрирован пользователь или администратор, то вывести кнопку для вызова формы редактирования
                     if($isMessageEditable) {
 
                         $messageId = $message['message_id'];
@@ -26,6 +29,7 @@
                         echo "<input class='message-edit-button' type='button' value='$editButtonValue' onclick='return guestbook.showEditingMessage($messageId)'>";
 
                     }
+
                 ?>
 
             </div>
@@ -37,45 +41,31 @@
                     <p><?= str_replace(array("\r\n", "\r", "\n"), '<br>', $message['message_messagetext']); ?></p>
                 </div>
                 <?php
+
+                    //Если на сообщение ответил администратор, то выводим его
                     if(isset($message['message_adminreply']) && $message['message_adminreply']) {
-                        echo "<p class='admin-reply-title'>Ответ администратора:</p>";
-                        echo "<div><p>";
-                            echo str_replace(array("\r\n", "\r", "\n"), '<br>', $message['message_adminreply']);
-                        echo "</p></div>";
+
+                        echo "<p class='admin-reply-title'>Ответ администратора:</p>
+                                <div><p> {${str_replace(array('\r\n', '\r', '\n'), '<br>', $message['message_adminreply'])}} </p>
+                              </div>";
+
                     }
 
+                    //Если зарегистрирован пользователь или администратор, то выводим дополнительно полную информацию о сообщении
                     if($isMessageEditable) {
 
-                        echo "<div class='message__userdata'>";
-        
-                            echo "<p class='user-data-title'>Данные посетителя:</p>";
-        
-                            echo "<div class='user-email'>";
-                                echo "<p>";
-                                    echo "Email: ".$message['message_useremail'];
-                                echo "</p>";
-                            echo "</div>";
-        
-                            echo "<div class='user-userIP'>";
-                                echo "<p>";
-                                    echo "IP:".$message['message_userIP'];
-                                echo "</p>";
-                            echo "</div>";
-        
-                            echo "<div class='user-userbrowser'>";
-                                echo "<p>";
-                                    echo "Браузер: ".$message['message_user_browser'];
-                                echo "</p>";
-                            echo "</div>";
-        
-                            echo "<div class='user-ismessagemoderated'>";
-                                echo "<p>";
-                                    echo ( $message['message_is_moderated'] == "1") ? "Сообщение модерировано и опубликовано" : "Сообщение не модерировано или скрыто"; 
-                                echo "</p>";
-                            echo "</div>";
-        
-                        echo "</div>";
+                        echo "<div class='message__userdata'>
+                                <p class='user-data-title'>Данные посетителя:</p>
+                                <div class='user-email'><p>Email: {$message['message_useremail']}</p></div>
+                                <div class='user-userIP'><p>IP: {$message['message_userIP']}</p></div>
+                                <div class='user-userbrowser'><p>Браузер: {$message['message_user_browser']}</p></div>
+                                <div class='user-ismessagemoderated'><p>
+                                    {${( $message['message_is_moderated'] == "1") ? "Сообщение модерировано и опубликовано" : "Сообщение не модерировано или скрыто"}}
+                                </p></div>
+                              </div>";
+
                     }
+
                 ?>
             </div>
         </div>
@@ -83,6 +73,7 @@
 
 <? 
 }
+//Вывод пагинации
 require_once __DIR__.'/../../modules/Pagination/Pagination.php';
 new Pagination($_SESSION['guestbook_numOfRecords'], $_SESSION['guestbook_currentPage'], $_SESSION['guestbook_recordsPerPage']);
 ?>

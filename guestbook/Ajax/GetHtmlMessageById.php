@@ -1,4 +1,5 @@
 <?php
+    //Получение формы для редактирования сообщения по id. Вызывается ajax-запросом. Возвращается флаг isSuccess=true и данные в случае успеха.
     namespace guestbook;
 
     if(isset($_POST) && isset($_POST['message_id'])) {

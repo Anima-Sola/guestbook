@@ -1,6 +1,7 @@
 <?php
     session_start();
 
+    //Подключаем скрипт гостевой книги
     require_once __DIR__."\guestbook\guestbook.php";
 
     use guestbook\GuestBook;
@@ -16,6 +17,7 @@
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta http-equiv="Cache-Control" content="private">
     <link rel="stylesheet" href="/css/style.css">
+    <!-- Вставка стилей и скриптов гостевой книги -->
     <?= $guestBook->insertCssLinks(); ?>
     <?= $guestBook->insertJsLinks(); ?>
     
@@ -39,6 +41,7 @@
         <section class="wrapper">
             <div class="guestbook">
                 <?php 
+                    //Вывод самой гостевой книги
                     $guestBook->showGuestBook(); 
                 ?>
             <div>

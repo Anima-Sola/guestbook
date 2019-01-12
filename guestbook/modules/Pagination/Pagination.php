@@ -1,4 +1,5 @@
 <?php
+    //Класс для создания и отображения пагинации
     namespace guestbook;
 
     class Pagination {

@@ -1,4 +1,5 @@
 <?php
+    //Удаление сообщения из базы по id. Вызывается ajax-запросом. Возвращается флаг isSuccess=true в случае успеха.
     namespace guestbook;
 
     if(isset($_POST) && isset($_POST['message_id'])) {
