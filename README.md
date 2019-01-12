@@ -8,6 +8,7 @@
     use guestbook\GuestBook;
     $guestBook = new GuestBook();
 ?>
+```
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,6 +38,7 @@
     </main>
 </body>
 </html>
+```
 
 3. Для работы гостевой книги необходимы три переменные сохраненные в сессии при авторизации пользователя:
 $_SESSION['guestbook_userName'], 
