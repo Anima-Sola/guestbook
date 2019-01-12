@@ -1,10 +1,25 @@
 <?php
+    /*
+        Главный класс гостевой книги.
+        Для работы необходимы сохраненные в сессии переменные, которые должны устанавливаться при авторизации пользователя:
+        $_SESSION['guestbook_userName']
+        $_SESSION['guestbook_userEmail']
+        $_SESSION['guestbook_adminName']
+        Гостевая книга имеет три состояния:
+        1) Если пользователь не авторизован, то выводится форма добавления нового сообщения и список сообщений
+        2) Если пользователь авторизован, и это не admin, т.е. $_SESSION['guestbook_userName'] != $_SESSION['guestbook_adminName']
+        то выводится состояние состоящее из двух вкладок, первая - как в п.1, вторая - сообщения пользователя с этим именем с возможностью
+        редактирования
+        3) Если пользователь авторизован, и это админ, т.е. $_SESSION['guestbook_userName'] == $_SESSION['guestbook_adminName']
+        то выводится состояние состоящее из двух вкладок, первая - не модерированные сообщения, вторая - все сообщения, с возможностью редактирования
+    */
     namespace guestbook;
 
     class GuestBook {
         
         protected $filesPaths;
         
+        //Подключение к БД, инициализация параметров
         function __construct() {
 
             require_once __DIR__.'/DataBase/DBConnect.php';
@@ -17,6 +32,7 @@
             
         }
         
+        //Вставка ссылок на файлы css стилей гостевой книги
         public function insertCssLinks() {
             
             foreach($this->filesPaths['css'] as $value) {
@@ -26,6 +42,7 @@
             return $cssLinks;
         }    
         
+        //Вставка ссылок на файлы js гостевой книги
         public function insertJsLinks() {
             
             foreach($this->filesPaths['js'] as $value) {
@@ -35,17 +52,10 @@
             return $jsLinks;
         }
         
+        //Вывод гостевой книги
         public function showGuestBook() {
             
-            /*$_SESSION['guestbook_userName'] = "Леонид Анатольевич";
-            $_SESSION['guestbook_userEmail'] = "user@user.ru";
-            $_SESSION['guestbook_adminName'] = "admin";*/
-            
-            /*unset($_SESSION['guestbook_userName']);
-            unset($_SESSION['guestbook_userEmail']);
-            unset($_SESSION['guestbook_adminName']);
-            unset($_SESSION['guestbook_isAdmin']);*/
-            
+            //Получение параметра get 'page' для пагинации. Текущая страница
             $_SESSION['guestbook_currentPage'] = ( (int) $_GET['page'] > 0 ) ? $_GET['page'] : 1;
             
             if(isset($_SESSION['guestbook_userName']) && isset($_SESSION['guestbook_userEmail']) && isset($_SESSION['guestbook_adminName'])) {

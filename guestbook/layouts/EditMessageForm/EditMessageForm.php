@@ -1,4 +1,6 @@
 <?php
+    //Вывод формы для редактирования сообщения администратором или пользователем
+    //Вызывается файлом GetHtmlMessageById.php, который в свою очередь вызывается ajax запросом
     namespace guestbook;
 
     session_start();
@@ -37,6 +39,7 @@
     <div class="edit-message__textarea-block">
         <div class="edit-message__info-field"><p>Ответ администратора:</p></div>
         <?php
+            //Если залогинен админ, то выводится textarea с возможностью редактирования ответа, иначе заблокированная
             if($isAdmin) {
 
                 echo "<textarea class='edit-message__textarea' dataForSending='true' name='message_adminreply'>$adminReply</textarea>";
@@ -53,6 +56,7 @@
         <?php
             $messageId = $message['message_id'];
             
+            //Если залогинен админ, то выводится один список меню, если пользователь то друго
             if($isAdmin) {
                 
                 if($isMessageModerated) {

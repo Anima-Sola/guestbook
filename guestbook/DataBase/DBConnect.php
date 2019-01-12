@@ -1,5 +1,5 @@
 <?php
-    
+    //Скрипт подключения к базе данных
     namespace guestbook;
 
     require_once __DIR__.'/DBObject.php';

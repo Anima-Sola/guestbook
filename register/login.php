@@ -16,6 +16,7 @@
 				//если пароль совпадает, то нужно авторизовать пользователя
                 $_SESSION['logged_user'] = $user;
 
+                //Переменные, необходимые для работы гостевой книги
                 $_SESSION['guestbook_userName'] = $user->login;
                 $_SESSION['guestbook_userEmail'] = $user->email;
                 $_SESSION['guestbook_adminName'] = "admin";

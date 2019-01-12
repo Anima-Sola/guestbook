@@ -88,9 +88,12 @@
                 $user->password = password_hash($data['password'], PASSWORD_DEFAULT); //пароль нельзя хранить в открытом виде, мы его шифруем при помощи функции password_hash для php > 5.6
 				R::store($user);
 				$_SESSION['logged_user'] = $user;
+
+				//Переменные, необходимые для работы гостевой книги
 				$_SESSION['guestbook_userName'] = $user->login;
 				$_SESSION['guestbook_userEmail'] = $user->email;
 				$_SESSION['guestbook_adminName'] = "admin";
+
                 //echo '<div style="color:dreen;">Вы успешно зарегистрированы!</div><hr>';
 
                 $isRegisterSuccess = true;

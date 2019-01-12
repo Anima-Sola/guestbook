@@ -1,6 +1,8 @@
 <?php
+    //Сохранение нового сообщения в базу. Вызывается ajax запросом. Возвращается флаг isSuccess=true и данные в случае успеха.
     namespace guestbook;
 
+    //Получаем IP-адрес пользователя
     function getUserIP() {
         
         $client  = @$_SERVER['HTTP_CLIENT_IP'];
@@ -15,6 +17,7 @@
         
     }
 
+    //Сохраняем сообщение в БД
     function saveMessageToDB($data) {
 
         require_once __DIR__.'/../DataBase/DBConnect.php';
